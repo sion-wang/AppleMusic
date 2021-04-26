@@ -10,7 +10,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.sion.applemusic"
+        applicationId "com.sion.itunes"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
@@ -18,7 +18,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "APPLE_MUSIC_API_HOST", '"https://api.github.com"'
+        buildConfigField "String", "ITUNES_API_HOST", '"https://itunes.apple.com"'
     }
 
     buildTypes {

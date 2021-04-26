@@ -1,4 +1,4 @@
-# AppleMusic
+# iTunes Search
 - MVVM
 - Coroutines
 - Koin

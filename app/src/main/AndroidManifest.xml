@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sion.applemusic">
+    package="com.sion.itunes">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.sion.applemusic.App"
+        android:name="com.sion.itunes.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Applemusic">
-        <activity android:name="com.sion.applemusic.view.main.MainActivity">
+        android:theme="@style/Theme.Itunes">
+        <activity android:name=".view.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
