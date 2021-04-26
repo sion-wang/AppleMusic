@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
+
+    <ImageButton
+        android:id="@+id/ib_close"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="15dp"
+        android:layout_margin="20dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/close"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@null" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15"/>
+
+    <ImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/user"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline1"
+        android:contentDescription="@null" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/iv_avatar"
+        app:layout_constraintEnd_toEndOf="@id/iv_avatar"
+        app:layout_constraintTop_toBottomOf="@id/iv_avatar"
+        tools:text="Github user" />
+
+    <TextView
+        android:id="@+id/tv_bio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/iv_avatar"
+        app:layout_constraintEnd_toEndOf="@id/iv_avatar"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        tools:text="Bio" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/light_gray_88"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_bio" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15"/>
+
+    <ImageView
+        android:id="@+id/iv_login"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/user2"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        android:contentDescription="@null"/>
+
+    <ImageView
+        android:id="@+id/iv_location"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/location"
+        app:layout_constraintStart_toStartOf="@id/iv_login"
+        app:layout_constraintTop_toBottomOf="@id/iv_login"
+        android:contentDescription="@null"/>
+
+    <ImageView
+        android:id="@+id/iv_link"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/link"
+        app:layout_constraintStart_toStartOf="@id/iv_location"
+        app:layout_constraintTop_toBottomOf="@id/iv_location"
+        android:contentDescription="@null"/>
+
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintStart_toEndOf="@id/iv_login"
+        app:layout_constraintTop_toTopOf="@id/iv_login"
+        app:layout_constraintBottom_toTopOf="@id/tv_staff"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="github users" />
+
+    <TextView
+        android:id="@+id/tv_staff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_staff"
+        android:fontFamily="sans-serif-medium"
+        android:paddingHorizontal="10dp"
+        android:text="@string/staff"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/tv_login"
+        app:layout_constraintTop_toBottomOf="@id/tv_login"
+        app:layout_constraintBottom_toBottomOf="@id/iv_login"/>
+
+    <TextView
+        android:id="@+id/tv_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_location"
+        app:layout_constraintTop_toTopOf="@id/iv_location"
+        app:layout_constraintBottom_toBottomOf="@id/iv_location"
+        tools:text="San Francisco" />
+
+    <TextView
+        android:id="@+id/tv_blog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_link"
+        app:layout_constraintTop_toTopOf="@id/iv_link"
+        app:layout_constraintBottom_toBottomOf="@id/iv_link"
+        tools:text="http://blog.com" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
