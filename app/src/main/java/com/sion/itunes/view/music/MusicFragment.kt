@@ -1,7 +1,5 @@
 package com.sion.itunes.view.music
 
-import android.media.MediaPlayer
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -9,28 +7,26 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import com.sion.itunes.R
+import com.sion.itunes.view.audio.AudioDialogFragment
 import com.sion.itunes.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_music.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinApiExtension
-import timber.log.Timber
 
 @KoinApiExtension
-class MusicFragment : BaseFragment() {
+class MusicFragment(private val keyword: String = "pop") : BaseFragment() {
     private val viewModel: MusicViewModel by viewModels()
     override fun getLayoutId() = R.layout.fragment_music
 
     private val musicFuncItem = MusicFuncItem(
         onMusicItemClick = { music ->
-            Timber.d("@@$music")
-            mediaPlayer.setDataSource(music.previewUrl)
-            mediaPlayer.prepare()
-            mediaPlayer.start()
+            AudioDialogFragment(music).show(
+                requireActivity().supportFragmentManager,
+                AudioDialogFragment::class.java.simpleName
+            )
         }
     )
-
-    private val mediaPlayer: MediaPlayer = MediaPlayer()
 
     private val loadStateListener = { loadStatus: CombinedLoadStates ->
         when (loadStatus.refresh) {
@@ -68,7 +64,7 @@ class MusicFragment : BaseFragment() {
         }
     }
 
-    private fun search(key: String = "pop") {
+    private fun search(key: String = keyword) {
         lifecycleScope.launch {
             viewModel.search(key).collectLatest {
                 musicAdapter.submitData(it)

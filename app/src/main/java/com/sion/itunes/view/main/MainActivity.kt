@@ -1,16 +1,18 @@
 package com.sion.itunes.view.main
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
+import android.widget.SearchView
 import com.sion.itunes.R
 import com.sion.itunes.view.base.BaseActivity
 import com.sion.itunes.view.music.MusicFragment
-import com.sion.itunes.view.search.SearchDialogFragment
 import org.koin.core.component.KoinApiExtension
 
+@KoinApiExtension
 class MainActivity : BaseActivity() {
-    @KoinApiExtension
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -19,24 +21,26 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.menu, menu)
+        menuInflater.inflate(R.menu.menu, menu)
+        // 獲取搜尋Menu
+        val searchView = (menu?.findItem(R.id.search)?.actionView as SearchView)
+
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        searchView.apply {
+            setSearchableInfo(searchManager.getSearchableInfo(componentName))
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    query?.run { navigateTo(MusicFragment(this)) }
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return true
+                }
+
+            })
+        }
         return true
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_search -> {
-                SearchDialogFragment().show(
-                    supportFragmentManager,
-                    SearchDialogFragment::class.java.simpleName
-                )
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-
-    }
-
 
 }
