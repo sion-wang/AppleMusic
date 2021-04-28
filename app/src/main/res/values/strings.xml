@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">itunes search</string>
+    <string name="app_name">iTunes Search</string>
     <string name="users">Users</string>
     <string name="staff">staff</string>
     <string name="ok">OK</string>
+    <string name="search">search</string>
 </resources>
