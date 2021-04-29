@@ -19,7 +19,7 @@
         tools:src="@drawable/record" />
 
     <TextView
-        android:id="@+id/tv_artist_name"
+        android:id="@+id/tv_track_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -31,20 +31,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_cover"
-        tools:text="twenty one pilots" />
+        tools:text="Lane Boy" />
 
     <TextView
-        android:id="@+id/tv_track_name"
+        android:id="@+id/tv_artist_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif"
         android:gravity="center"
         android:lines="1"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_artist_name"
-        tools:text="Lane Boy" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_track_name"
+        tools:text="twenty one pilots" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

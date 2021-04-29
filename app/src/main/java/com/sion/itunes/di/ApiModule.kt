@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.sion.itunes.BuildConfig
 import com.sion.itunes.model.api.ApiRepository
 import com.sion.itunes.model.api.ApiService
-import com.sion.itunes.model.api.GithubInterceptor
+import com.sion.itunes.model.api.ItunesInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -13,15 +13,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 val apiModule = module {
-    single { provideGithubInterceptor() }
+    single { provideItunesInterceptor() }
     single { provideHttpLoggingInterceptor() }
     single { provideOkHttpClient(get(), get()) }
     single { provideApiService(get()) }
     single { provideApiRepository(get()) }
 }
 
-fun provideGithubInterceptor(): GithubInterceptor {
-    return GithubInterceptor()
+fun provideItunesInterceptor(): ItunesInterceptor {
+    return ItunesInterceptor()
 }
 
 fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
@@ -31,14 +31,14 @@ fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
 }
 
 fun provideOkHttpClient(
-    githubInterceptor: GithubInterceptor,
+    itunesInterceptor: ItunesInterceptor,
     httpLoggingInterceptor: HttpLoggingInterceptor
 ): OkHttpClient {
     val builder = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(60, TimeUnit.SECONDS)
         .writeTimeout(60, TimeUnit.SECONDS)
-        .addInterceptor(githubInterceptor)
+        .addInterceptor(itunesInterceptor)
         .addInterceptor(httpLoggingInterceptor)
     return builder.build()
 }

@@ -22,23 +22,25 @@ class MainActivity : BaseActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
-        // 獲取搜尋Menu
         val searchView = (menu?.findItem(R.id.search)?.actionView as SearchView)
-
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         searchView.apply {
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     query?.run { navigateTo(MusicFragment(this)) }
-                    return true
+                    return false
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    return true
+                    return false
                 }
-
             })
+
+            setOnCloseListener {
+                navigateTo(MusicFragment())
+                false
+            }
         }
         return true
     }
