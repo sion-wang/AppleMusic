@@ -68,7 +68,7 @@ class MusicFragment(private val keyword: String = "pop") : BaseFragment() {
 
     private fun search(key: String = keyword) {
         lifecycleScope.launch {
-            viewModel.searchThroughDB(key).collectLatest {
+            viewModel.search(key, true).collectLatest {
                 musicAdapter.submitData(it)
             }
         }

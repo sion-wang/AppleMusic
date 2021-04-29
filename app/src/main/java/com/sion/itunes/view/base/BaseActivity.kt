@@ -26,10 +26,12 @@ abstract class BaseActivity : AppCompatActivity() {
     fun showDialog(title: String, msg: String) {
         if (!::alertDialog.isInitialized) {
             alertDialog =
-                AlertDialog.Builder(this).setPositiveButton(R.string.ok, null).setTitle(title)
+                AlertDialog.Builder(this, R.style.AlertDialog).setPositiveButton(R.string.ok, null).setTitle(title)
                     .setMessage(msg).create()
+
         }
         alertDialog.takeIf { !it.isShowing }?.run { this.dismiss() }
         alertDialog.show()
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getColor(R.color.teal_700))
     }
 }

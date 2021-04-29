@@ -13,7 +13,15 @@ import org.koin.core.component.KoinApiExtension
 @KoinApiExtension
 @ExperimentalPagingApi
 class MusicViewModel: BaseViewModel() {
-    fun search(keyword: String): Flow<PagingData<Music>> {
+    fun search(keyword: String, throughDb: Boolean = false): Flow<PagingData<Music>>  {
+        return if (throughDb) {
+            searchThroughDb(keyword)
+        } else {
+            searchInMemory(keyword)
+        }
+    }
+
+    private fun searchInMemory(keyword: String): Flow<PagingData<Music>> {
         return Pager(
             config = PagingConfig(
                 pageSize = ApiRepository.NETWORK_PAGE_SIZE,
@@ -23,7 +31,7 @@ class MusicViewModel: BaseViewModel() {
         ).flow.cachedIn(viewModelScope)
     }
 
-    fun searchThroughDB(keyword: String) : Flow<PagingData<Music>> {
+    private fun searchThroughDb(keyword: String) : Flow<PagingData<Music>> {
         return Pager(
             config = PagingConfig(
                 pageSize = ApiRepository.NETWORK_PAGE_SIZE,
@@ -32,6 +40,6 @@ class MusicViewModel: BaseViewModel() {
             remoteMediator = PageKeyedRemoteMediator(itunesDb, apiRepository, keyword)
         ) {
             itunesDb.musics().musicsByKeyword(keyword)
-        }.flow
+        }.flow.cachedIn(viewModelScope)
     }
 }

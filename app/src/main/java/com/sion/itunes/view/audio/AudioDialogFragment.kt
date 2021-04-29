@@ -63,6 +63,19 @@ class AudioDialogFragment(val music: Music) : BaseDialogFragment() {
             mainHandler.postDelayed(runnable, 1000)
         }
 
+        setupAndStartMediaPlayer()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        stopAndRelease(mediaPlayer)
+        mainHandler.removeCallbacks(runnable)
+    }
+
+    /**
+     *  setup [MediaPlayer] and start playing when prepared
+     */
+    private fun setupAndStartMediaPlayer() {
         mediaPlayer = MediaPlayer().also { mp ->
             mp.setDataSource(music.previewUrl)
             mp.prepareAsync()
@@ -77,14 +90,13 @@ class AudioDialogFragment(val music: Music) : BaseDialogFragment() {
                 ib_control.setImageResource(R.drawable.play)
             }
         }
-
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        release()
-    }
-
+    /**
+     * format millisecond to MM:SS
+     * @param duration millisecond
+     * @return String MM:SS
+     */
     private fun formatDuration(duration: Int): String {
         val absSeconds = abs(ceil(duration.toDouble() / 1000).toInt())
         val positive = String.format(
@@ -95,11 +107,9 @@ class AudioDialogFragment(val music: Music) : BaseDialogFragment() {
         return if (duration < 0) "-$positive" else positive
     }
 
-    private fun release() {
-        stopAndRelease(mediaPlayer)
-        mainHandler.removeCallbacks(runnable)
-    }
-
+    /**
+     * Stop and release [MediaPlayer]
+     */
     private fun stopAndRelease(mediaPlayer: MediaPlayer?) {
         mediaPlayer?.run {
             try {

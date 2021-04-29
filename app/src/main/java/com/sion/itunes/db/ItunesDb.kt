@@ -9,7 +9,7 @@ import com.sion.itunes.db.vo.RemoteKey
 import com.sion.itunes.model.vo.Music
 
 /**
- * Database schema used by the
+ * Database schema
  */
 @Database(
     entities = [Music::class, RemoteKey::class],
