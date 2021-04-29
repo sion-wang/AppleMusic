@@ -1,4 +1,4 @@
-package com.sion.itunes.view.music
+package com.sion.itunes.view.music.repository
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

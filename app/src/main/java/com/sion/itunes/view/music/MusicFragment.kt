@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import com.sion.itunes.R
 import com.sion.itunes.view.audio.AudioDialogFragment
@@ -15,6 +16,7 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinApiExtension
 
 @KoinApiExtension
+@ExperimentalPagingApi
 class MusicFragment(private val keyword: String = "pop") : BaseFragment() {
     private val viewModel: MusicViewModel by viewModels()
     override fun getLayoutId() = R.layout.fragment_music
@@ -66,7 +68,7 @@ class MusicFragment(private val keyword: String = "pop") : BaseFragment() {
 
     private fun search(key: String = keyword) {
         lifecycleScope.launch {
-            viewModel.search(key).collectLatest {
+            viewModel.searchThroughDB(key).collectLatest {
                 musicAdapter.submitData(it)
             }
         }
