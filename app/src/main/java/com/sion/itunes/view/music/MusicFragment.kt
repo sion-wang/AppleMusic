@@ -10,6 +10,7 @@ import androidx.paging.LoadState
 import com.sion.itunes.R
 import com.sion.itunes.view.audio.AudioDialogFragment
 import com.sion.itunes.view.base.BaseFragment
+import com.sion.itunes.view.base.footer.BaseLoadStateAdapter
 import kotlinx.android.synthetic.main.fragment_music.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -61,7 +62,7 @@ class MusicFragment(private val keyword: String = "pop") : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         rv_music.takeIf { it.adapter == null }?.let {
-            it.adapter = musicAdapter
+            it.adapter = musicAdapter.withLoadStateFooter(BaseLoadStateAdapter())
             search()
         }
     }
