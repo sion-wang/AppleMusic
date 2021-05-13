@@ -2,14 +2,14 @@ package com.sion.itunes.view.music.repository
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.sion.itunes.model.api.ApiRepository
-import com.sion.itunes.model.api.ApiRepository.Companion.NETWORK_PAGE_SIZE
+import com.sion.itunes.model.api.search.SearchApiRepository
+import com.sion.itunes.model.api.search.SearchApiRepository.Companion.NETWORK_PAGE_SIZE
 import com.sion.itunes.model.vo.Music
 import retrofit2.HttpException
 import timber.log.Timber
 import java.lang.Exception
 
-class MusicPagingSource(private val apiRepository: ApiRepository, private val keyword: String) :
+class MusicPagingSource(private val searchApiRepository: SearchApiRepository, private val keyword: String) :
     PagingSource<Int, Music>() {
     override fun getRefreshKey(state: PagingState<Int, Music>): Int? {
         return state.anchorPosition
@@ -18,7 +18,7 @@ class MusicPagingSource(private val apiRepository: ApiRepository, private val ke
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Music> {
         return try {
             val offset = params.key ?: 0
-            val result = apiRepository.search(keyword, offset)
+            val result = searchApiRepository.search(keyword, offset)
             if (result.isSuccessful) {
                 val musics = result.body()?.results ?: arrayListOf()
                 val nextKey =

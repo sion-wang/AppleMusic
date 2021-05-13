@@ -2,8 +2,8 @@ package com.sion.itunes.di
 
 import com.google.gson.Gson
 import com.sion.itunes.BuildConfig
-import com.sion.itunes.model.api.ApiRepository
-import com.sion.itunes.model.api.ApiService
+import com.sion.itunes.model.api.search.SearchApiRepository
+import com.sion.itunes.model.api.search.SearchApiService
 import com.sion.itunes.model.api.ItunesInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -43,15 +43,15 @@ fun provideOkHttpClient(
     return builder.build()
 }
 
-fun provideApiService(okHttpClient: OkHttpClient): ApiService {
+fun provideApiService(okHttpClient: OkHttpClient): SearchApiService {
     return Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create(Gson()))
         .client(okHttpClient)
         .baseUrl(BuildConfig.ITUNES_API_HOST)
         .build()
-        .create(ApiService::class.java)
+        .create(SearchApiService::class.java)
 }
 
-fun provideApiRepository(apiService: ApiService): ApiRepository {
-    return ApiRepository(apiService)
+fun provideApiRepository(searchApiService: SearchApiService): SearchApiRepository {
+    return SearchApiRepository(searchApiService)
 }

@@ -9,7 +9,7 @@ import com.sion.itunes.db.ItunesDb
 import com.sion.itunes.db.MusicDao
 import com.sion.itunes.db.RemoteKeyDao
 import com.sion.itunes.db.vo.RemoteKey
-import com.sion.itunes.model.api.ApiRepository
+import com.sion.itunes.model.api.search.SearchApiRepository
 import com.sion.itunes.model.vo.Music
 import retrofit2.HttpException
 import java.io.IOException
@@ -17,7 +17,7 @@ import java.io.IOException
 @ExperimentalPagingApi
 class PageKeyedRemoteMediator(
     private val db: ItunesDb,
-    private val api: ApiRepository,
+    private val searchApi: SearchApiRepository,
     private val keyword: String
 ) : RemoteMediator<Int, Music>() {
     private val musicDao: MusicDao = db.musics()
@@ -38,7 +38,7 @@ class PageKeyedRemoteMediator(
                 }
             }
 
-            val result = api.search(keyword, loadKey?.toInt() ?: 0)
+            val result = searchApi.search(keyword, loadKey?.toInt() ?: 0)
             val currentTime = System.currentTimeMillis()
             val items: List<Music> = result.takeIf { it.isSuccessful }?.body()?.results?.mapIndexed { index, music ->
                 music.keyword = keyword
@@ -52,7 +52,7 @@ class PageKeyedRemoteMediator(
                     remoteKeyDao.deleteByKeyword(keyword)
                 }
 
-                val nextPageKey = (loadKey?.toInt()?:0) + ApiRepository.NETWORK_PAGE_SIZE
+                val nextPageKey = (loadKey?.toInt()?:0) + SearchApiRepository.NETWORK_PAGE_SIZE
                 remoteKeyDao.insert(RemoteKey(keyword, nextPageKey.toString()))
                 musicDao.insertAll(items)
             }
