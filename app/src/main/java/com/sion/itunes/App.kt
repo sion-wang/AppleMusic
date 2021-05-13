@@ -1,8 +1,10 @@
 package com.sion.itunes
 
 import android.app.Application
+import androidx.paging.ExperimentalPagingApi
 import com.sion.itunes.di.apiModule
 import com.sion.itunes.di.dbModule
+import com.sion.itunes.di.viewModelModule
 import com.sion.itunes.widget.log.DebugLogTree
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -14,6 +16,7 @@ class App: Application() {
         const val DB_NAME = "itunes.db"
     }
 
+    @ExperimentalPagingApi
     override fun onCreate() {
         super.onCreate()
 
@@ -23,7 +26,8 @@ class App: Application() {
 
         val module = listOf(
             apiModule,
-            dbModule
+            dbModule,
+            viewModelModule
         )
 
         startKoin {

@@ -2,7 +2,6 @@ package com.sion.itunes.view.music
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.ExperimentalPagingApi
@@ -14,12 +13,13 @@ import com.sion.itunes.view.base.footer.BaseLoadStateAdapter
 import kotlinx.android.synthetic.main.fragment_music.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinApiExtension
 
 @KoinApiExtension
 @ExperimentalPagingApi
 class MusicFragment(private val keyword: String = "pop") : BaseFragment() {
-    private val viewModel: MusicViewModel by viewModels()
+    private val viewModel: MusicViewModel by viewModel()
     override fun getLayoutId() = R.layout.fragment_music
 
     private val musicFuncItem = MusicFuncItem(

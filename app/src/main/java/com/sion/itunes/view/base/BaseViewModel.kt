@@ -7,8 +7,4 @@ import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-@KoinApiExtension
-abstract class BaseViewModel: ViewModel(), KoinComponent {
-    val searchApiRepository: SearchApiRepository by inject()
-    val itunesDb: ItunesDb by inject()
-}
+abstract class BaseViewModel : ViewModel()
