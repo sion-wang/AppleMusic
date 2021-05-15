@@ -5,6 +5,7 @@ import com.sion.itunes.BuildConfig
 import com.sion.itunes.model.api.search.SearchApiRepository
 import com.sion.itunes.model.api.search.SearchApiService
 import com.sion.itunes.model.api.ItunesInterceptor
+import com.sion.itunes.model.api.search.ISearchApiRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -52,6 +53,6 @@ fun provideApiService(okHttpClient: OkHttpClient): SearchApiService {
         .create(SearchApiService::class.java)
 }
 
-fun provideApiRepository(searchApiService: SearchApiService): SearchApiRepository {
+fun provideApiRepository(searchApiService: SearchApiService): ISearchApiRepository {
     return SearchApiRepository(searchApiService)
 }

@@ -1,6 +1,8 @@
 package com.sion.itunes.model.api.search
 
 import com.sion.itunes.model.vo.SearchResponse
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.Response
 
 class FakeSearchApiService(private val searchResponse: SearchResponse?) : SearchApiService {
@@ -13,6 +15,8 @@ class FakeSearchApiService(private val searchResponse: SearchResponse?) : Search
                 return Response.success(SearchResponse(this.size, this))
             }
         }
-        return Response.error(500, null)
+        return Response.error(500, "{\"msg\":\"null response\"}"
+            .toResponseBody("application/json".toMediaTypeOrNull())
+        )
     }
 }
