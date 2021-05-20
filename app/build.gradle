@@ -37,7 +37,23 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.31"
+    // Dependencies for local unit tests
+    testImplementation "junit:junit:4.13.2"
+    testImplementation "org.hamcrest:hamcrest-all:1.3"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation "org.robolectric:robolectric:4.3.1"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9"
+
+    // AndroidX Test - JVM testing
+    testImplementation "androidx.test:core-ktx:1.3.0"
+    testImplementation "androidx.test.ext:junit:1.1.2"
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // AndroidX
     implementation "androidx.appcompat:appcompat:1.2.0"
@@ -45,11 +61,6 @@ dependencies {
     implementation "com.google.android.material:material:1.4.0-alpha02"
     implementation "androidx.activity:activity-ktx:1.2.2"
     implementation "androidx.fragment:fragment-ktx:1.3.3"
-
-    // Kotlin Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3"
-
     // Constraint Layout
     implementation "androidx.constraintlayout:constraintlayout:2.0.4"
 
@@ -59,6 +70,17 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+
+    // Room
+    implementation "androidx.room:room-runtime:2.3.0"
+    kapt "androidx.room:room-compiler:2.3.0"
+    implementation "androidx.room:room-ktx:2.3.0"
+
+    // Kotlin Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3"
+
+
 
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
@@ -71,10 +93,7 @@ dependencies {
     // Paging
     implementation "androidx.paging:paging-runtime-ktx:3.0.0-rc01"
 
-    // Room
-    implementation "androidx.room:room-runtime:2.3.0"
-    kapt "androidx.room:room-compiler:2.3.0"
-    implementation "androidx.room:room-ktx:2.3.0"
+
 
     // Glide
     implementation "com.github.bumptech.glide:glide:4.11.0"
@@ -95,19 +114,4 @@ dependencies {
 
     // Timber
     implementation "com.jakewharton.timber:timber:4.7.1"
-
-
-    // Dependencies for local unit tests
-    testImplementation "junit:junit:4.13.2"
-    testImplementation "org.hamcrest:hamcrest-all:1.3"
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
-    testImplementation "org.robolectric:robolectric:4.3.1"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9"
-
-    // AndroidX Test - JVM testing
-    testImplementation "androidx.test:core-ktx:1.3.0"
-    testImplementation "androidx.test.ext:junit:1.1.2"
-
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
