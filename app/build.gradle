@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
+    id 'kotlinx-serialization'
 }
 
 android {
@@ -81,6 +82,11 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3"
 
 
+    implementation "io.ktor:ktor-client-core:$ktor_version"
+    implementation "io.ktor:ktor-client-android:$ktor_version"
+    implementation "io.ktor:ktor-client-serialization:$ktor_version"
+    implementation "io.ktor:ktor-client-logging-jvm:$ktor_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version"
 
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
