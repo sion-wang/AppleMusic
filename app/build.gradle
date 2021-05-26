@@ -128,11 +128,11 @@ dependencies {
     // Koin AndroidX Fragment features
     implementation "org.koin:koin-androidx-fragment:$koin_version"
 //    // Koin AndroidX WorkManager
-//    implementation "org.koin:koin-androidx-workmanager:$koin_version"
+    implementation "org.koin:koin-androidx-workmanager:$koin_version"
 //    // Koin AndroidX Jetpack Compose
-//    implementation "org.koin:koin-androidx-compose:$koin_version"
+    implementation "org.koin:koin-androidx-compose:$koin_version"
 //    // Koin for Ktor Kotlin
-//    implementation "org.koin:koin-ktor:$koin_version"// !! Could not find org.koin:koin-ktor:2.2.3
+    implementation "org.koin:koin-ktor:$koin_version"// !! Could not find org.koin:koin-ktor:2.2.3
 //    //// Koin 3 -- start support Kotlin Multiplatform
 //    implementation "io.insert-koin:koin-core:$koin_version"
 //// Koin Extended & experimental features (JVM)
