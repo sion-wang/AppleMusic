@@ -13,7 +13,7 @@ import com.sion.itunes.view.base.footer.BaseLoadStateAdapter
 import kotlinx.android.synthetic.main.fragment_music.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinApiExtension
 
 @KoinApiExtension
