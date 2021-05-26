@@ -34,7 +34,7 @@ class App : Application() {
         startKoin {
             androidLogger(Level.ERROR)
             androidContext(this@App)
-            koin.loadModules(module) 
+            koin.loadModules(module)
         }
     }
 }
