@@ -12,7 +12,7 @@ import org.junit.Test
 @ExperimentalCoroutinesApi
 class SearchApiRepositoryTest {
 
-    private lateinit var fakeSearchApiService: FakeSearchApiService
+    private lateinit var fakeSearchApiService: SearchApiService
 
     private lateinit var searchApiRepository: SearchApiRepository
 
