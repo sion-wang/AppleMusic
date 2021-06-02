@@ -3,6 +3,7 @@ buildscript {
     ext {
         android_gradle_plugin_version = '4.1.2'
         kotlin_version = "1.4.32"
+        koin_version = "2.2.1"
     }
     repositories {
         google()
