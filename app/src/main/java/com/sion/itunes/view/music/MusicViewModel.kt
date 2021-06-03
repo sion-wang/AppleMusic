@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.*
 import com.sion.itunes.db.ItunesDb
 import com.sion.itunes.model.api.search.ISearchApiRepository
+//import com.sion.itunes.model.api.search.ISearchApiRepository
 import com.sion.itunes.model.api.search.SearchApiRepository
 import com.sion.itunes.model.vo.Music
 import com.sion.itunes.view.base.BaseViewModel
@@ -13,9 +14,7 @@ import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinApiExtension
 
 @ExperimentalPagingApi
-class MusicViewModel(
-    private val searchApiRepository: ISearchApiRepository, private val itunesDb: ItunesDb
-) : BaseViewModel() {
+class MusicViewModel(private val searchApiRepository: ISearchApiRepository, private val itunesDb: ItunesDb ) : BaseViewModel() {
     fun search(keyword: String, throughDb: Boolean = false): Flow<PagingData<Music>> {
         return if (throughDb) {
             searchThroughDb(keyword)
@@ -30,7 +29,9 @@ class MusicViewModel(
                 pageSize = SearchApiRepository.NETWORK_PAGE_SIZE,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { MusicPagingSource(searchApiRepository, keyword) }
+            pagingSourceFactory = {
+                MusicPagingSource(searchApiRepository, keyword)
+            }
         ).flow.cachedIn(viewModelScope)
     }
 
@@ -41,6 +42,7 @@ class MusicViewModel(
                 enablePlaceholders = false
             ),
             remoteMediator = PageKeyedRemoteMediator(itunesDb, searchApiRepository, keyword)
+
         ) {
             itunesDb.musics().musicsByKeyword(keyword)
         }.flow.cachedIn(viewModelScope)
