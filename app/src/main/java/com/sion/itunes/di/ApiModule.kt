@@ -90,7 +90,7 @@ private val okHttpKtor = HttpClient(CIO) {
         serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
             prettyPrint = true
             isLenient = true
-            ignoreUnknownKeys = true
+            ignoreUnknownKeys = true//FIXME not work ?!!
         })
     }
     install(Logging) {

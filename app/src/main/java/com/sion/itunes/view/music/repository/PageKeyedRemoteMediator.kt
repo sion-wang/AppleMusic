@@ -51,7 +51,9 @@ class PageKeyedRemoteMediator(private val db: ItunesDb, private val searchApi: I
             val currentTime = System.currentTimeMillis()
             var items: List<Music> =arrayListOf()
             if (httpstatus_code.isSuccess()){
-                val searchresponse = Json.decodeFromString<SearchResponse>(body)
+                val searchresponse = Json {
+                    ignoreUnknownKeys = true
+                }.decodeFromString<SearchResponse>(body)
                 items=searchresponse.results
             }
             items.mapIndexed { index, music ->
